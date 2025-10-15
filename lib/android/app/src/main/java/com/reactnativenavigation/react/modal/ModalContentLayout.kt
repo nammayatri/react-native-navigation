@@ -16,12 +16,14 @@ class ModalContentLayout(context: Context?) : ReactViewGroup(context), RootView{
 
     private val mJSTouchDispatcher = JSTouchDispatcher(this)
 
-    override fun onChildStartedNativeGesture(child: View, androidEvent: MotionEvent) {
+    override fun onChildStartedNativeGesture(child: View?, androidEvent: MotionEvent) {
         mJSTouchDispatcher.onChildStartedNativeGesture(androidEvent, this.getEventDispatcher())
     }
+
     override fun onChildStartedNativeGesture(androidEvent: MotionEvent) {
         mJSTouchDispatcher.onChildStartedNativeGesture(androidEvent, this.getEventDispatcher())
     }
+
     override fun onChildEndedNativeGesture(child: View, androidEvent: MotionEvent) {
         mJSTouchDispatcher.onChildEndedNativeGesture(androidEvent, this.getEventDispatcher())
     }
@@ -31,7 +33,7 @@ class ModalContentLayout(context: Context?) : ReactViewGroup(context), RootView{
         return UIManagerHelper.getEventDispatcher(reactContext, UIManagerType.FABRIC) ?: throw IllegalStateException("EventDispatcher for Fabric UI Manager is not found")
     }
 
-    override fun handleException(t: Throwable?) {
+    override fun handleException(t: Throwable) {
         getReactContext().handleException(RuntimeException(t))
     }
 
